@@ -47,6 +47,7 @@ public class Main extends ApplicationAdapter {
         y += vel;
         vel = 0;
         x--;
+        if(y + 64 < 0 || y > Gdx.graphics.getHeight()) Gdx.app.exit();
         for(Obstacle o: obstacles) { 
             sr.rect(o.x, o.bottom ? 0: Gdx.graphics.getHeight() - o.height, 100, o.height);
             if(o.x >= 0 && o.x <= 164 && ((o.bottom &&  y <= o.height) || (!o.bottom && y + 64 >= Gdx.graphics.getHeight() - o.height))) Gdx.app.exit();
