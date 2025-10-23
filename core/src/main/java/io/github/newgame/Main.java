@@ -41,18 +41,18 @@ public class Main extends ApplicationAdapter {
         sr.setColor(Color.PINK);
         sr.rect(100, y, 64, 64);
         sr.setColor(Color.WHITE);
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) vel += 100 * (vel + Math.sin(1));
-        else if(vel <= 0) vel = (float)(-6.0 * (vel + Math.cos(1)));
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
-        y += vel;
-        vel = 0;
-        x--;
         if(y + 64 < 0 || y > Gdx.graphics.getHeight()) Gdx.app.exit();
         for(Obstacle o: obstacles) { 
             sr.rect(o.x, o.bottom ? 0: Gdx.graphics.getHeight() - o.height, 100, o.height);
             if(o.x >= 0 && o.x <= 164 && ((o.bottom &&  y <= o.height) || (!o.bottom && y + 64 >= Gdx.graphics.getHeight() - o.height))) Gdx.app.exit();
             o.x-=10;
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) vel += 100 * (vel + Math.sin(1));
+        else if(vel <= 0) vel = (float)(-6.0 * (vel + Math.cos(1)));
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
+        y += vel;
+        vel = 0;
+        x--;
         sr.end();
         sm.endBatch();
         if(x%60==0) obstacles.add(new Obstacle());
