@@ -16,7 +16,7 @@ import io.github.newgame.Managers.SpriteManager;
 public class Main extends ApplicationAdapter {
     SpriteManager sm;
     ShapeRenderer sr;
-    float x, y, vel;
+    float x, y, vel, grav;
     ArrayList<Obstacle> obstacles;
 
     @Override
@@ -26,6 +26,7 @@ public class Main extends ApplicationAdapter {
         x = 0;
         y = 200;
         vel = 0;
+        grav = -3;
         obstacles = new ArrayList<>();
     }
 
@@ -48,9 +49,8 @@ public class Main extends ApplicationAdapter {
             o.x-=10;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) vel += 100 * (vel + Math.sin(1));
-        else if(vel <= 0) vel = (float)(-6.0 * (vel + Math.cos(1)));
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
-        y += vel;
+        y += vel + grav;
         vel = 0;
         x--;
         sr.end();
